@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import ButtonGrid from './components/ButtonGrid';
+import Result from './components/Result';
 
 function App() {
     return (
         <div className="App">
-            <ButtonGrid number='0'/>
+            <Result />
+            <ButtonGrid number='0' />
         </div>
     );
 }
