@@ -10,7 +10,7 @@ function App() {
     return (
         <div className="App">
             <Result textToShow={result ? result : current}/>
-            <ButtonGrid number='0' />
+            <ButtonGrid />
         </div>
     );
 }
