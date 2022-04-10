@@ -9,7 +9,7 @@ export default class Button extends React.Component {
 
     render() {
         return (
-            <td colSpan={this.span}><button onClick={() => {this.props.onClick(this.content)}}>{this.content}</button></td>
+            <td colSpan={this.span}><button onClick={() => this.props.onClick(parseInt(this.content))}>{this.content}</button></td>
         );
     }
 }
