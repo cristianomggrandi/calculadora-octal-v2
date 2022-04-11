@@ -9,10 +9,11 @@ function App() {
     const [current, setCurrent] = useState(0);
 
     function handleClick(i) {
+        //switch (typeof i)
         if ((typeof i) === "number") {
             setCurrent(i);
         } else {
-
+            setCurrent(i);
         }
     }
 
