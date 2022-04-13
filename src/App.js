@@ -4,29 +4,34 @@ import Button from './components/Button';
 import ButtonGrid from './components/ButtonGrid';
 import Result from './components/Result';
 
-function App() {
-
+export default function App() {
     const [result, setResult] = useState(null);
-    const [current, setCurrent] = useState(0);
-
-    //TODO: insertNumber while result on screen
+    const [current, setCurrent] = useState('0');
 
     function insertNumber(i) {
-        setCurrent(i);
+        i = i.toString();
+        if (current === '0') {setCurrent(i); return}
+        setCurrent(current + i);
+    }
+
+    function insertOperator(operator) {
+        setCurrent(current + " " + operator + " ");
     }
 
     function clearValue() {
-        if (current) setCurrent(0);
-        else setResult(null);
+        if (current === '0') {setResult('0'); return;}
+        setCurrent('0');
     }
 
     function equals() {
+        let equationArray = current.split('x').join('*').split(' ');
+        let tempEquationArray = [];
+        for (let i = 0; i < equationArray.length; i++) {
+            if (!Button.operatorOptions.includes(equationArray[i])) tempEquationArray.push(parseInt(equationArray[i], 8));
+            else tempEquationArray.push(equationArray[i]);
+        }
+        setCurrent(Math.floor(eval(tempEquationArray.join(''))).toString(8));
         setResult(current);
-        setCurrent(0);
-    }
-
-    function chooseOperator(operator) {
-        setCurrent(operator)
     }
 
     function handleClick(i, type) {
@@ -35,18 +40,17 @@ function App() {
                 insertNumber(i);
                 break;
             case 'string':
-                if (Button.operatorOptions.includes(i)) chooseOperator(i);
+                if (Button.operatorOptions.includes(i)) insertOperator(i);
                 if (i === '=') equals();
                 if (i === 'C') clearValue();
+                break;
         }
     }
 
     return (
         <div className="App">
-            <Result textToShow={result ? result : current} />
+            <Result textToShow={current} />
             <ButtonGrid onClick={(i, type) => handleClick(i, type)} />
         </div>
     );
 }
-
-export default App;

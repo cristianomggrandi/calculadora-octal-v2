@@ -2,7 +2,7 @@ import React from "react";
 
 export default class Button extends React.Component {
 
-    static operatorOptions = ['+', '-', '/', 'x'];
+    static operatorOptions = ['+', '-', '/', 'x', '*'];
 
     constructor(props) {
         super(props);
